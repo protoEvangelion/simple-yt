@@ -10,7 +10,7 @@ export const YtSearch = () => {
   const [videoList, setVideoList] = React.useState<string[]>([])
 
   return (
-    <div className=" m-4 flex flex-col gap-4">
+    <div className="m-8 flex flex-col gap-4">
       <div className="flex gap-4 items-center">
         <Input
           label="Search"
