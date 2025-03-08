@@ -4,10 +4,7 @@ import React from 'react'
 import { YtVideo, search } from '../actions'
 import { Card, CardBody, CardFooter, Input, Skeleton } from '@heroui/react'
 
-const ytSearch = async (text: string) => {
-  const data = await search(text)
-  return data
-}
+const ytSearch = async (text: string) => search(text)
 
 export const YtSearch = () => {
   const [text, setText] = React.useState('')
@@ -51,7 +48,7 @@ export const YtSearch = () => {
           <div className="h-24 rounded-lg bg-default-300" />
         </Skeleton>
       ) : (
-        <div className="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+        <div className="gap-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
           {videoList.map((x) => (
             <Card key={x.id} classNames={{ base: 'flex justify-center' }}>
               <CardBody className="max-w-3xl">
@@ -64,10 +61,12 @@ export const YtSearch = () => {
                 ></iframe>
               </CardBody>
               <CardFooter className="pb-0 pt-2 px-4 flex-col items-start">
+                <p>{x.title}</p>
+                <p>
+                  {x.durationFormatted} | {x.uploadedAt} |{' '}
+                  {x.views.toLocaleString()}
+                </p>
                 <p>{x.channel?.name}</p>
-                <p>Duration: {x.durationFormatted}</p>
-                <p>Uploaded At: {x.uploadedAt}</p>
-                <p>Views: {x.views.toLocaleString()}</p>
               </CardFooter>
             </Card>
           ))}
