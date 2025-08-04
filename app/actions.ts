@@ -40,7 +40,7 @@ export type YtVideo = {
 }
 
 export async function search(search: string) {
-  const values = (await YouTube.search(search, { limit: 10 })) as YtVideo[]
+  const values = (await YouTube.search(search, { limit: 25 })) as YtVideo[]
 
   return values.map((x) => ({
     id: x.id,
