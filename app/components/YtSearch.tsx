@@ -31,9 +31,12 @@ export const YtSearch = () => {
   const filterVideosByRecency = (videos: YtVideo[]): YtVideo[] => {
     if (recencyFilter === 'all') return videos
 
-    const now = new Date()
     return videos.filter((video) => {
       const uploadedText = video.uploadedAt.toLowerCase()
+      
+      // Note: This is a best-effort filter based on text parsing of the uploadedAt field.
+      // The youtube-sr API doesn't provide precise timestamps, only human-readable strings.
+      // This may not be 100% accurate for edge cases.
       
       if (recencyFilter === 'hour') {
         return uploadedText.includes('minute') || uploadedText.includes('hour')
