@@ -10,7 +10,7 @@ Simple YT is a clean, no-fluff YouTube search application built with Next.js. It
 - **React**: 19.0.0
 - **TypeScript**: 5.x
 - **Styling**: Tailwind CSS 4.x
-- **UI Components**: HeroUI (Hero Icons) 2.6.14
+- **UI Components**: HeroUI 2.6.14
 - **Animations**: Framer Motion 11.18.1
 - **YouTube Search**: youtube-sr 4.3.11
 
