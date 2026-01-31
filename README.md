@@ -4,7 +4,6 @@ Simple YT search. No Fluff. No API token. Deployed with vercel.
 
 - Auto-focus search bar on page load for quick searching
 - Wide search bar (80vw) for better visibility
-- Filter results by recency (last hour, today, this week, this month, this year)
 
 ![image](https://github.com/user-attachments/assets/5b937c6e-1595-4727-9f73-0902e430c447)
 
