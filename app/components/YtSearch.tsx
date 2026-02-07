@@ -10,6 +10,14 @@ export const YtSearch = () => {
   const [text, setText] = React.useState('')
   const [loading, setIsLoading] = React.useState(false)
   const [videoList, setVideoList] = React.useState<YtVideo[]>([])
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  React.useEffect(() => {
+    // Auto-focus the input on mount
+    if (inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
 
   const onSearch = async () => {
     setIsLoading(true)
@@ -21,7 +29,9 @@ export const YtSearch = () => {
     <div className="m-8 flex flex-col gap-4">
       <div className="flex gap-4 items-center">
         <Input
+          ref={inputRef}
           label="Search"
+          className="w-[80vw]"
           onChange={(x) => setText(x.target.value)}
           onKeyUp={(x) => {
             if (x.key === 'Enter') {
