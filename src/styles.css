@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap");
+@config "../tailwind.config.ts";
+@import "tailwindcss";
+@source "../src/**/*.{ts,tsx}";
+@source "../node_modules/@heroui/theme/dist/**/*.{js,mjs,ts,tsx}";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --app-bg: #f7f0e8;
+  --app-bg-strong: #efe4d8;
+  --app-foreground: #18151c;
+  --app-muted: #655c69;
+  --app-line: rgba(24, 21, 28, 0.12);
+  --accent-strong: #ffb58c;
+  --accent-soft: rgba(255, 181, 140, 0.26);
+  --accent-cool: #90e4ff;
+  --accent-warm: #ffc36c;
+  --player-surface: rgba(249, 241, 233, 0.96);
+}
+
+:root[data-theme="dark"] {
+  --app-bg: #0f1118;
+  --app-bg-strong: #171923;
+  --app-foreground: #f7f1e8;
+  --app-muted: #b8b0bd;
+  --app-line: rgba(255, 255, 255, 0.11);
+  --accent-strong: #ffb58c;
+  --accent-soft: rgba(255, 181, 140, 0.18);
+  --accent-cool: #8fe4ff;
+  --accent-warm: #ffd37a;
+  --player-surface: rgba(18, 20, 31, 0.96);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--app-foreground);
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at top left, rgba(255, 181, 140, 0.24), transparent 30%),
+    radial-gradient(circle at 84% 14%, rgba(144, 228, 255, 0.24), transparent 24%),
+    radial-gradient(circle at 60% 100%, rgba(255, 211, 122, 0.14), transparent 28%),
+    linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--app-bg) 88%, white) 0%,
+      var(--app-bg) 52%,
+      var(--app-bg-strong) 100%
+    );
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.3;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(circle at 50% 25%, black, transparent 72%);
+}
+
+a {
+  color: inherit;
+}
+
+.display-font {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--app-muted);
+}
+
+.editorial-panel {
+  border: 1px solid var(--app-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.56)),
+    linear-gradient(140deg, rgba(255, 181, 140, 0.08), rgba(144, 228, 255, 0.04));
+  backdrop-filter: blur(18px);
+}
+
+.dark .editorial-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04)),
+    linear-gradient(140deg, rgba(255, 181, 140, 0.08), rgba(144, 228, 255, 0.03));
+}
