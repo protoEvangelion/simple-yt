@@ -1,4 +1,6 @@
-<video src="https://github.com/protoEvangelion/simple-yt/raw/master/docs/demo.mov" controls width="100%"></video>
+
+
+https://github.com/user-attachments/assets/b6e08c0b-c8e5-4d04-80e1-8274f98771ab
 
 Simple YouTube search with a TanStack Start rewrite, Bun runtime, HeroUI components, and a bright editorial theme with dark mode by default.
 
