@@ -2,64 +2,70 @@
 
 https://github.com/user-attachments/assets/b6e08c0b-c8e5-4d04-80e1-8274f98771ab
 
-Simple YouTube search with a TanStack Start rewrite, Bun runtime, HeroUI components, and a bright editorial theme with dark mode by default.
+# 📺 Simple YT
 
-## Stack
+A snappy YouTube search engine powered by **TanStack Start**, **Bun**, and **HeroUI**. Features a bright editorial theme with a rock-solid dark mode by default. ⚡️
 
-- Bun
-- TanStack Start
-- HeroUI
-- Tailwind CSS v4
-- `youtube-sr`
-- Oxlint + Oxfmt
-- TypeScript beta
+---
 
-## Scripts
+## 🛠️ Stack
+
+- 🍞 **Bun** — Runtime & Package Manager
+- 🚀 **TanStack Start** — Full-stack React framework
+- ✨ **HeroUI** — Polished UI components
+- 🎨 **Tailwind CSS v4** — Utility-first styling
+- 🕵️ **youtube-sr** — YouTube scraping/searching
+- 🛠️ **Oxlint + Oxfmt** — Blazing fast linting & formatting
+- 🔷 **TypeScript beta** — Cutting-edge type safety
+
+## 🚀 Scripts
 
 ```bash
-bun run dev
-bun run build
-bun run preview
-bun run lint
-bun run format
-bun run typecheck
-bun run check
+bun run dev       # Start development server
+bun run build     # Build for production
+bun run preview   # Preview production build
+bun run lint      # Lint with Oxlint
+bun run format    # Format with Oxfmt
+bun run typecheck # Check types
+bun run check     # Run all checks
 ```
 
-## How it works
+## 🧠 How it works
 
-### Routing
+### 🗺️ Routing
 
-TanStack Start uses file-based routing under `src/routes/`. Each file exports a `Route` created with `createFileRoute`. The generated `src/routeTree.gen.ts` is auto-updated by the Vite plugin — never edit it by hand.
+TanStack Start uses file-based routing under `src/routes/`. The generated `src/routeTree.gen.ts` is auto-updated by the Vite plugin — **never edit it by hand.**
 
-- `__root.tsx` — wraps every page in `<HeroUIProvider>` and injects the theme init script into `<head>` before any paint
-- `index.tsx` — the search page; owns the URL state (`q`, `time`, `video` params) and loader
-- `player.tsx` — bare iframe page opened by the mini player button via `window.open()`
+- `__root.tsx` — Wraps every page in `<HeroUIProvider>` and injects the theme init script.
+- `index.tsx` — The search engine; manages URL state (`q`, `time`, `video`) and server loaders.
+- `player.tsx` — Bare iframe page for the mini-player.
 
-### Data flow
+### 🌊 Data flow
 
-1. User types a query → URL param `?q=` is updated via `useNavigate`
-2. TanStack Router's `loader` fires on the server, calls `searchVideos` server function
-3. Results are serialized and streamed to the client as loader data
-4. The component reads `Route.useLoaderData()` — no client-side fetch, no useEffect data fetching
+1. **User types** → URL param `?q=` updates via `useNavigate`.
+2. **Loader fires** → TanStack Router's server loader calls `searchVideos`.
+3. **Streaming** → Results are serialized and streamed to the client.
+4. **Zero-Fetch UI** → Component reads `Route.useLoaderData()` — no client-side `useEffect` or manual fetches required. 🪄
 
-### Server functions
+### ⚡ Server functions
 
-Server functions are registered with `createServerFn` from `@tanstack/react-start`. The Vite plugin detects these at build time and splits them into separate server-only bundles, automatically exposing them as HTTP endpoints. Calling a server function from the client transparently becomes a fetch to that endpoint.
+Registered with `createServerFn`. The Vite plugin splits these into server-only bundles and exposes them as HTTP endpoints.
 
-**Why the split file pattern:**
+> [!NOTE]
+> **Why the split file pattern?**
+> - `youtube.functions.ts` — Imported by both client and server (defines the signature).
+> - `youtube.server.ts` — Server-only logic, never sent to the browser.
+>
+> This keeps heavy dependencies like `youtube-sr` and Node internals out of your client bundle. 📦
 
-```
-src/lib/youtube.functions.ts  ← imported by both client and server
-src/lib/youtube.server.ts     ← server-only, never sent to the browser
-```
+### 🎨 Theme
 
-`youtube.functions.ts` defines the `searchVideos` server function. Its `.handler()` uses a dynamic `import('./youtube.server')` so the heavy `youtube-sr` scraping logic (and all of Node's `http` internals it pulls in) is never bundled into the client. The client only sees the function signature and the generated fetch stub.
+`src/lib/theme.ts` exports `themeInitScript`, a minified script injected into `<head>`. It reads `localStorage` and sets the theme **before the first paint**, eliminating that annoying "flash of unstyled content" (FOUC). 🌗
 
-### Theme
+### 🔍 Search strategy
 
-`src/lib/theme.ts` exports a minified inline script (`themeInitScript`) injected as a render-blocking `<script>` in `<head>`. It reads `localStorage` and sets `data-theme` + the `dark` class on `<html>` before the first paint, eliminating the flash of wrong theme on hard refresh. See the JSDoc in that file for the full explanation.
+`youtube.server.ts` uses a resilient dual-path strategy:
+1. **Primary**: `youtube-sr` (with retries).
+2. **Fallback**: Raw HTML fetch + custom `ytInitialData` parser.
 
-### Search strategy
-
-`youtube.server.ts` tries `youtube-sr` first (up to 2 attempts), then falls back to a raw HTML fetch + custom `ytInitialData` parser if the library fails. Both paths apply the time filter and cap at 24 results.
+Both paths respect time filters and cap results at 24 for optimal performance. 🏎️
