@@ -1,3 +1,5 @@
+<video src="./docs/demo.mov" controls width="100%"></video>
+
 Simple YouTube search with a TanStack Start rewrite, Bun runtime, HeroUI components, and a bright editorial theme with dark mode by default.
 
 ## Stack
