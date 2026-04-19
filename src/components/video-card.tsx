@@ -16,18 +16,19 @@ export function VideoCard({ video, onPress }: VideoCardProps) {
   return (
     <motion.div
       data-testid="video-card"
+      className="h-full"
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
     >
       <Card
         isPressable
-        className="group overflow-hidden border border-black/10 bg-white/72 text-left text-inherit shadow-[0_18px_60px_rgba(12,16,30,0.08)] backdrop-blur-md dark:border-white/8 dark:bg-white/6"
+        className="group h-full overflow-hidden border border-black/10 bg-white/72 text-left text-inherit shadow-[0_18px_60px_rgba(12,16,30,0.08)] backdrop-blur-md dark:border-white/8 dark:bg-white/6"
         radius="lg"
         shadow="none"
         onPress={onPress}
       >
-        <CardBody className="gap-4 p-0">
-          <div className="relative aspect-video overflow-hidden">
+        <CardBody className="flex flex-col gap-4 p-0">
+          <div className="relative min-h-[11rem] flex-1 overflow-hidden">
             <Image
               alt={video.title}
               className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
