@@ -37,8 +37,8 @@ export function VideoCard({ video, onPress }: VideoCardProps) {
               removeWrapper
               src={video.thumbnail}
             />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/50 via-black/10 to-transparent" />
-            <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-2">
+            <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-24 bg-gradient-to-b from-black/50 via-black/10 to-transparent" />
+            <div className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-between gap-2">
               <span className="rounded-full border border-white/18 bg-black/72 px-3 py-1 text-[11px] font-medium tracking-[0.08em] text-white uppercase backdrop-blur-md">
                 {video.durationFormatted}
               </span>
