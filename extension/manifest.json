@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Simple YT",
+  "version": "1.0.0",
+  "description": "Open YouTube videos in Simple YT (localhost:3000)",
+  "permissions": ["contextMenus"],
+  "host_permissions": ["*://*.youtube.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
