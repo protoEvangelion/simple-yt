@@ -2,12 +2,19 @@
   "manifest_version": 3,
   "name": "Simple YT",
   "version": "1.0.0",
-  "description": "Open YouTube videos in Simple YT (localhost:3000)",
+  "description": "Open videos in Simple YT and reduce YouTube ad clutter",
   "permissions": ["contextMenus"],
   "host_permissions": ["*://*.youtube.com/*"],
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["youtube-ad-blocker.js"],
+      "run_at": "document_start"
+    }
+  ],
   "icons": {
     "16": "icon.png",
     "48": "icon.png",
