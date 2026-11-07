@@ -1,0 +1,43 @@
+#board-layout-ad,
+#sidebar-ad,
+#ad_unit,
+#main-ad,
+#tall-sidebar-ad,
+#medium-rectangle-atf-ad,
+#medium-rectangle-btf-ad,
+#leaderboard-atf-ad,
+#leaderboard-btf-ad,
+.board-layout-ad,
+.skyscraper-ad-component,
+.skyscraper-ad-slot,
+.short-sidebar-ad-component,
+.short-sidebar-ad-top,
+.short-sidebar-ad-bottom,
+.game-over-ad-component,
+.leaderboard-ad-component,
+.leaderboard-ad-slot,
+.leaderboard-atf-ad-wrapper,
+.leaderboard-btf-ad-wrapper,
+.medium-rectangle-ad-component,
+.medium-rectangle-ad-slot,
+.medium-rectangle-atf-ad-wrapper,
+.medium-rectangle-btf-ad-wrapper,
+.index-content-ad-wrapper,
+.r2d2-wrapper,
+.video-ad-component,
+[class*="-ad-component"],
+[class*="-ad-wrapper"],
+[class*="-ad-slot"],
+iframe[id^="google_ads_iframe"],
+iframe[title="3rd party ad content"],
+iframe[aria-label="Advertisement"],
+ins.adsbygoogle,
+[id^="div-gpt-ad"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}

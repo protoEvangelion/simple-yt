@@ -1,18 +1,56 @@
 {
   "manifest_version": 3,
   "name": "Simple YT",
-  "version": "1.0.0",
-  "description": "Open videos in Simple YT and reduce YouTube ad clutter",
-  "permissions": ["contextMenus"],
-  "host_permissions": ["*://*.youtube.com/*"],
+  "version": "1.2.1",
+  "description": "Open videos in Simple YT and block ads on YouTube, Chess.com, and other sites",
+  "permissions": ["contextMenus", "declarativeNetRequest"],
+  "host_permissions": ["http://*/*", "https://*/*"],
   "background": {
     "service_worker": "background.js"
   },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "generic_ads",
+        "enabled": true,
+        "path": "adblock-rules.json"
+      }
+    ]
+  },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*",
+        "*://*.youtube-nocookie.com/*",
+        "*://youtube-nocookie.com/*"
+      ],
       "js": ["youtube-ad-blocker.js"],
+      "css": ["youtube-player-tweaks.css"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["*://*.chess.com/*"],
+      "js": ["chess-ad-blocker.js"],
+      "css": ["chess-ad-blocker.css"],
       "run_at": "document_start"
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "exclude_matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*",
+        "*://*.youtube-nocookie.com/*",
+        "*://youtube-nocookie.com/*",
+        "*://youtu.be/*",
+        "*://*.chess.com/*",
+        "*://chess.com/*"
+      ],
+      "js": ["generic-ad-blocker.js"],
+      "css": ["generic-ad-blocker.css"],
+      "run_at": "document_start",
+      "all_frames": true
     }
   ],
   "icons": {

@@ -1,0 +1,12 @@
+/* YouTube's newer embed hover chrome: darken + giant center pause */
+.player-controls-background,
+.player-control-play-pause-icon,
+.ytp-large-play-button,
+.ytp-pause-overlay,
+.ytp-pause-overlay-container,
+.ytp-bezel,
+.ytp-bezel-text-wrapper {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

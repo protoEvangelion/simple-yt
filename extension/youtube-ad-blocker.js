@@ -1,22 +1,22 @@
 const AD_ELEMENT_SELECTORS = [
-  'ytd-display-ad-renderer',
-  'ytd-promoted-sparkles-web-renderer',
-  'ytd-promoted-video-renderer',
-  'ytd-video-masthead-ad-v3-renderer',
-  'ytd-in-feed-ad-layout-renderer',
-  'ytd-ad-slot-renderer',
-  'ytm-promoted-video-renderer',
-  '.ytp-ad-image-overlay',
-  '.ytp-ad-overlay-container',
-  '.ytp-suggested-action-badge',
-  '.ytd-display-ad-renderer',
-  '.ytd-promoted-sparkles-web-renderer',
+  "ytd-display-ad-renderer",
+  "ytd-promoted-sparkles-web-renderer",
+  "ytd-promoted-video-renderer",
+  "ytd-video-masthead-ad-v3-renderer",
+  "ytd-in-feed-ad-layout-renderer",
+  "ytd-ad-slot-renderer",
+  "ytm-promoted-video-renderer",
+  ".ytp-ad-image-overlay",
+  ".ytp-ad-overlay-container",
+  ".ytp-suggested-action-badge",
+  ".ytd-display-ad-renderer",
+  ".ytd-promoted-sparkles-web-renderer",
 ];
 
 const SKIP_BUTTON_SELECTORS = [
-  '.ytp-ad-skip-button-modern',
-  '.ytp-ad-skip-button',
-  '.videoAdUiSkipButton',
+  ".ytp-ad-skip-button-modern",
+  ".ytp-ad-skip-button",
+  ".videoAdUiSkipButton",
   'button[aria-label="Skip ads"]',
   'button[aria-label="Skip ad"]',
 ];
@@ -27,9 +27,9 @@ function hideAdElements(root = document) {
   for (const selector of AD_ELEMENT_SELECTORS) {
     const elements = root.querySelectorAll(selector);
     for (const element of elements) {
-      element.style.setProperty('display', 'none', 'important');
-      element.style.setProperty('visibility', 'hidden', 'important');
-      element.setAttribute('hidden', 'true');
+      element.style.setProperty("display", "none", "important");
+      element.style.setProperty("visibility", "hidden", "important");
+      element.setAttribute("hidden", "true");
     }
   }
 }
@@ -42,16 +42,16 @@ function clickSkipButtons(root = document) {
     }
   }
 
-  const closeOverlayButton = root.querySelector('.ytp-ad-overlay-close-button');
+  const closeOverlayButton = root.querySelector(".ytp-ad-overlay-close-button");
   if (closeOverlayButton) {
     closeOverlayButton.click();
   }
 }
 
 function fastForwardAdVideo(root = document) {
-  if (!root.querySelector('.ad-showing')) return;
+  if (!root.querySelector(".ad-showing")) return;
 
-  const video = root.querySelector('video');
+  const video = root.querySelector("video");
   if (!video) return;
 
   const duration = Number(video.duration);
@@ -69,7 +69,7 @@ function cleanupAds(root = document) {
 function setupObserver() {
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
-      if (mutation.type !== 'childList') continue;
+      if (mutation.type !== "childList") continue;
       for (const node of mutation.addedNodes) {
         if (node.nodeType !== Node.ELEMENT_NODE) continue;
         cleanupAds(node);
