@@ -7,7 +7,7 @@ type SearchInput = {
 };
 
 export const searchVideos = createServerFn({ method: "GET" })
-  .inputValidator((data: SearchInput) => {
+  .validator((data: SearchInput) => {
     const query = data.query.trim().slice(0, 120);
 
     if (!query) {
